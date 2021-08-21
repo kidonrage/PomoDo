@@ -9,6 +9,7 @@ import UIKit
 
 class DashboardViewController: UIViewController {
 
+    @IBOutlet weak var todayWorkedLabel: UILabel!
     @IBOutlet weak var newTaskField: UITextField!
     @IBOutlet weak var tasksTableView: UITableView!
     @IBOutlet weak var playNewTaskButton: UIButton!
@@ -24,6 +25,18 @@ class DashboardViewController: UIViewController {
 
         setupTable()
         setupUI()
+        
+        updateTodayWorkHours(withHoursAmount: 4)
+    }
+    
+    private func updateTodayWorkHours(withHoursAmount hoursAmount: Int) {
+        let string = NSMutableAttributedString(string: "Сегодня вы работали ")
+        
+        string.append(NSAttributedString(string: "\(hoursAmount)ч", attributes: [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
+        ]))
+        
+        todayWorkedLabel.attributedText = string
     }
     
     private func setupTable() {
@@ -38,7 +51,6 @@ class DashboardViewController: UIViewController {
     private func setupUI() {
         
     }
-
 }
 
 
@@ -60,5 +72,4 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
 }

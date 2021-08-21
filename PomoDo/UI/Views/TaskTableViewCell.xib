@@ -22,16 +22,16 @@
                         <rect key="frame" x="16" y="8" width="288" height="44"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Coy-Mc-5Ix">
-                                <rect key="frame" x="8" y="13" width="272" height="18"/>
+                                <rect key="frame" x="16" y="13" width="256" height="18"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCq-3j-HWn">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="234" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3WR-Li-rEi">
-                                        <rect key="frame" x="258" y="1.5" width="14" height="14.5"/>
+                                        <rect key="frame" x="242" y="1.5" width="14" height="14.5"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="14" id="XQ6-Za-iJO"/>
@@ -43,9 +43,9 @@
                         </subviews>
                         <color key="backgroundColor" name="Light Field  Background"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Coy-Mc-5Ix" secondAttribute="trailing" constant="8" id="4pl-Sm-bf9"/>
+                            <constraint firstAttribute="trailing" secondItem="Coy-Mc-5Ix" secondAttribute="trailing" constant="16" id="4pl-Sm-bf9"/>
                             <constraint firstAttribute="height" constant="44" id="5s6-Tp-gNm"/>
-                            <constraint firstItem="Coy-Mc-5Ix" firstAttribute="leading" secondItem="Zar-s5-pLe" secondAttribute="leading" constant="8" id="CIB-81-BqC"/>
+                            <constraint firstItem="Coy-Mc-5Ix" firstAttribute="leading" secondItem="Zar-s5-pLe" secondAttribute="leading" constant="16" id="CIB-81-BqC"/>
                             <constraint firstItem="Coy-Mc-5Ix" firstAttribute="centerY" secondItem="Zar-s5-pLe" secondAttribute="centerY" id="Fym-PX-YSn"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>

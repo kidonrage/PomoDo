@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tasks-->
+        <!--Задачи-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="DashboardViewController" customModule="PomoDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,6 +20,50 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZ3-9f-RnV">
                                 <rect key="frame" x="0.0" y="88" width="414" height="698"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="X7i-ns-YFK">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncJ-29-LNC">
+                                            <rect key="frame" x="16" y="16" width="382" height="64"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today you worked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMi-Ks-3yF">
+                                                    <rect key="frame" x="16" y="21.5" width="350" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemBackgroundColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="labelColor"/>
+                                            <constraints>
+                                                <constraint firstItem="aMi-Ks-3yF" firstAttribute="leading" secondItem="ncJ-29-LNC" secondAttribute="leading" constant="16" id="Ekc-7n-2WU"/>
+                                                <constraint firstItem="aMi-Ks-3yF" firstAttribute="centerY" secondItem="ncJ-29-LNC" secondAttribute="centerY" id="HD8-qD-jfc"/>
+                                                <constraint firstAttribute="height" constant="64" id="Vil-cz-BGN"/>
+                                                <constraint firstAttribute="trailing" secondItem="aMi-Ks-3yF" secondAttribute="trailing" constant="16" id="lzt-Em-5OS"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Недавние" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgT-Yo-mxz">
+                                            <rect key="frame" x="16" y="104" width="382" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="ncJ-29-LNC" secondAttribute="trailing" constant="16" id="1wj-O2-Onm"/>
+                                        <constraint firstAttribute="trailing" secondItem="OgT-Yo-mxz" secondAttribute="trailing" constant="16" id="CkH-kq-zHJ"/>
+                                        <constraint firstItem="OgT-Yo-mxz" firstAttribute="top" secondItem="ncJ-29-LNC" secondAttribute="bottom" constant="24" id="Egc-dK-XZN"/>
+                                        <constraint firstItem="ncJ-29-LNC" firstAttribute="top" secondItem="X7i-ns-YFK" secondAttribute="top" constant="16" id="VOd-sl-dVf"/>
+                                        <constraint firstItem="OgT-Yo-mxz" firstAttribute="leading" secondItem="X7i-ns-YFK" secondAttribute="leading" constant="16" id="gsd-qy-eMm"/>
+                                        <constraint firstItem="ncJ-29-LNC" firstAttribute="leading" secondItem="X7i-ns-YFK" secondAttribute="leading" constant="16" id="kTf-Ch-fIh"/>
+                                    </constraints>
+                                </view>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yo-vb-CKZ">
                                 <rect key="frame" x="16" y="802" width="382" height="44"/>
@@ -75,11 +119,12 @@
                             <constraint firstItem="6Yo-vb-CKZ" firstAttribute="top" secondItem="AZ3-9f-RnV" secondAttribute="bottom" constant="16" id="xfN-Qu-7bx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tasks" id="Cc4-Hn-jiS"/>
+                    <navigationItem key="navigationItem" title="Задачи" id="Cc4-Hn-jiS"/>
                     <connections>
                         <outlet property="newTaskField" destination="0gP-6y-Wme" id="V72-HT-4x2"/>
                         <outlet property="playNewTaskButton" destination="7fq-3X-ejG" id="J1d-fQ-coO"/>
                         <outlet property="tasksTableView" destination="AZ3-9f-RnV" id="foa-gm-nwL"/>
+                        <outlet property="todayWorkedLabel" destination="aMi-Ks-3yF" id="et5-hc-t2z"/>
                         <segue destination="ctp-CE-mvd" kind="show" id="fkz-J8-Y2P"/>
                     </connections>
                 </viewController>
@@ -130,6 +175,9 @@
         <namedColor name="Light Field  Border">
             <color red="0.66274509803921566" green="0.66666666666666663" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
