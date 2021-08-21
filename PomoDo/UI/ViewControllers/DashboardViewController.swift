@@ -14,6 +14,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var tasksTableView: UITableView!
     @IBOutlet weak var playNewTaskButton: UIButton!
     
+    private var selectedTask: Task?
+    
     private var tasks: [Task] = [
         Task(name: "Курить"),
         Task(name: "Шабить"),
@@ -27,6 +29,17 @@ class DashboardViewController: UIViewController {
         setupUI()
         
         updateTodayWorkHours(withHoursAmount: 4)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toFocus") {
+            guard
+                let vc = segue.destination as? TimerViewController,
+                let selectedTask = selectedTask
+            else { return }
+            
+            vc.task = selectedTask
+        }
     }
     
     private func updateTodayWorkHours(withHoursAmount hoursAmount: Int) {
@@ -71,5 +84,10 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: task)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedTask = tasks[indexPath.row]
+        performSegue(withIdentifier: "toFocus", sender: self)
     }
 }

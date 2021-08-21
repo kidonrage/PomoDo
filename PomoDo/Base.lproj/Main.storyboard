@@ -125,7 +125,7 @@
                         <outlet property="playNewTaskButton" destination="7fq-3X-ejG" id="J1d-fQ-coO"/>
                         <outlet property="tasksTableView" destination="AZ3-9f-RnV" id="foa-gm-nwL"/>
                         <outlet property="todayWorkedLabel" destination="aMi-Ks-3yF" id="et5-hc-t2z"/>
-                        <segue destination="ctp-CE-mvd" kind="show" id="fkz-J8-Y2P"/>
+                        <segue destination="ctp-CE-mvd" kind="show" identifier="toFocus" id="fkz-J8-Y2P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
