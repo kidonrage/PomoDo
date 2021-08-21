@@ -26,6 +26,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавить задачу" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gP-6y-Wme">
                                         <rect key="frame" x="8" y="8" width="334" height="28"/>
+                                        <color key="textColor" name="Light Field  Border"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -34,6 +35,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="wyT-rD-gcd"/>
                                         </constraints>
+                                        <color key="tintColor" name="Light Field  Border"/>
                                         <state key="normal" image="play.fill" catalog="system"/>
                                     </button>
                                 </subviews>
@@ -48,6 +50,17 @@
                                     <constraint firstAttribute="bottom" secondItem="0gP-6y-Wme" secondAttribute="bottom" constant="8" id="v0t-27-Mk7"/>
                                     <constraint firstAttribute="bottom" secondItem="7fq-3X-ejG" secondAttribute="bottom" constant="8" id="ykM-f8-59X"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="Light Field  Border"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -113,6 +126,9 @@
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <namedColor name="Light Field  Background">
             <color red="0.94901960784313721" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Light Field  Border">
+            <color red="0.66274509803921566" green="0.66666666666666663" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

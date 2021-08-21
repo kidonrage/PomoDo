@@ -2,7 +2,7 @@
 //  TimerViewController.swift
 //  PomoDo
 //
-//  Created by Aura on 21.08.2021.
+//  Created by Vlad Eliseev on 21.08.2021.
 //
 
 import UIKit

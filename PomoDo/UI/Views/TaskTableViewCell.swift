@@ -2,13 +2,15 @@
 //  TaskTableViewCell.swift
 //  PomoDo
 //
-//  Created by Aura on 21.08.2021.
+//  Created by Vlad Eliseev on 21.08.2021.
 //
 
 import UIKit
 
 class TaskTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var taskLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,5 +21,11 @@ class TaskTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    public func configure(with task: Task) {
+        taskLabel.text = task.name
+    }
+    
+    static let cellId = "TaskTableViewCell"
     
 }
