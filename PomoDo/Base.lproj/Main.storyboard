@@ -1,27 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rh9-K6-Bqq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Dashboard View Controller-->
+        <!--Tasks-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="DashboardViewController" customModule="PomoDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZ3-9f-RnV">
+                                <rect key="frame" x="0.0" y="88" width="414" height="698"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yo-vb-CKZ">
+                                <rect key="frame" x="16" y="802" width="382" height="44"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавить задачу" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gP-6y-Wme">
+                                        <rect key="frame" x="8" y="8" width="334" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-3X-ejG">
+                                        <rect key="frame" x="350" y="8" width="24" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="wyT-rD-gcd"/>
+                                        </constraints>
+                                        <state key="normal" image="play.fill" catalog="system"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="Light Field  Background"/>
+                                <constraints>
+                                    <constraint firstItem="7fq-3X-ejG" firstAttribute="top" secondItem="6Yo-vb-CKZ" secondAttribute="top" constant="8" id="A1m-W0-iJn"/>
+                                    <constraint firstAttribute="trailing" secondItem="7fq-3X-ejG" secondAttribute="trailing" constant="8" id="EsV-m0-BVI"/>
+                                    <constraint firstItem="0gP-6y-Wme" firstAttribute="top" secondItem="6Yo-vb-CKZ" secondAttribute="top" constant="8" id="GhM-wP-sRU"/>
+                                    <constraint firstAttribute="height" constant="44" id="Z2b-mQ-EEU"/>
+                                    <constraint firstItem="7fq-3X-ejG" firstAttribute="leading" secondItem="0gP-6y-Wme" secondAttribute="trailing" constant="8" symbolic="YES" id="e4P-6J-0XW"/>
+                                    <constraint firstItem="0gP-6y-Wme" firstAttribute="leading" secondItem="6Yo-vb-CKZ" secondAttribute="leading" constant="8" id="j7c-Xb-J84"/>
+                                    <constraint firstAttribute="bottom" secondItem="0gP-6y-Wme" secondAttribute="bottom" constant="8" id="v0t-27-Mk7"/>
+                                    <constraint firstAttribute="bottom" secondItem="7fq-3X-ejG" secondAttribute="bottom" constant="8" id="ykM-f8-59X"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Yo-vb-CKZ" secondAttribute="trailing" constant="16" id="0Nf-D9-zVB"/>
+                            <constraint firstItem="AZ3-9f-RnV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2Hh-kx-4Jn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6Yo-vb-CKZ" secondAttribute="bottom" constant="16" id="5VM-Pv-3cL"/>
+                            <constraint firstItem="AZ3-9f-RnV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AiN-lJ-9B6"/>
+                            <constraint firstItem="AZ3-9f-RnV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KAV-7I-tbB"/>
+                            <constraint firstItem="6Yo-vb-CKZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="U8D-Gu-K54"/>
+                            <constraint firstItem="6Yo-vb-CKZ" firstAttribute="top" secondItem="AZ3-9f-RnV" secondAttribute="bottom" constant="16" id="xfN-Qu-7bx"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Tasks" id="Cc4-Hn-jiS"/>
+                    <connections>
+                        <outlet property="newTaskField" destination="0gP-6y-Wme" id="V72-HT-4x2"/>
+                        <outlet property="playNewTaskButton" destination="7fq-3X-ejG" id="J1d-fQ-coO"/>
+                        <outlet property="tasksTableView" destination="AZ3-9f-RnV" id="foa-gm-nwL"/>
+                        <segue destination="ctp-CE-mvd" kind="show" id="fkz-J8-Y2P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-249" y="95"/>
+            <point key="canvasLocation" x="660.86956521739137" y="94.419642857142847"/>
         </scene>
         <!--Timer View Controller-->
         <scene sceneID="iuX-5G-9jh">
@@ -33,13 +84,36 @@
                         <viewLayoutGuide key="safeArea" id="hVx-B9-uF8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="N1r-aR-q3f"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YO6-bW-TRt" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="496" y="95"/>
+            <point key="canvasLocation" x="1405.7971014492755" y="94.419642857142847"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Uud-Xx-xAA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rh9-K6-Bqq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HkX-pM-kyx">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ixG-rS-fWu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lbh-Qy-wdF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-249.27536231884059" y="94.419642857142847"/>
         </scene>
     </scenes>
     <resources>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
+        <namedColor name="Light Field  Background">
+            <color red="0.94901960784313721" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
