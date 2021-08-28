@@ -18,6 +18,7 @@
 		C63FB4A426D112890099FB46 /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C63FB4A226D112890099FB46 /* TaskTableViewCell.xib */; };
 		C63FB4A726D115710099FB46 /* UIView+Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB4A626D115710099FB46 /* UIView+Designable.swift */; };
 		C63FB4AA26D1187D0099FB46 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB4A926D1187D0099FB46 /* Task.swift */; };
+		C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		C63FB4A226D112890099FB46 /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
 		C63FB4A626D115710099FB46 /* UIView+Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Designable.swift"; sourceTree = "<group>"; };
 		C63FB4A926D1187D0099FB46 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				C63FB4A126D112890099FB46 /* TaskTableViewCell.swift */,
 				C63FB4A226D112890099FB46 /* TaskTableViewCell.xib */,
+				C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				C63FB49E26D110910099FB46 /* TimerViewController.swift in Sources */,
 				C63FB48726D110330099FB46 /* AppDelegate.swift in Sources */,
+				C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */,
 				C63FB4A726D115710099FB46 /* UIView+Designable.swift in Sources */,
 				C63FB4A326D112890099FB46 /* TaskTableViewCell.swift in Sources */,
 				C63FB48926D110330099FB46 /* SceneDelegate.swift in Sources */,

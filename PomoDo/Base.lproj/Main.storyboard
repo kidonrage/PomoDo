@@ -139,10 +139,43 @@
                     <view key="view" contentMode="scaleToFill" id="ZqY-Of-9MN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygg-jp-q3s">
+                                <rect key="frame" x="184" y="596" width="46" height="46"/>
+                                <color key="backgroundColor" name="Light Field  Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="Ug7-Z6-7Yv"/>
+                                    <constraint firstAttribute="width" secondItem="ygg-jp-q3s" secondAttribute="height" multiplier="1:1" id="UmC-1K-EkY"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="Light Field  Border"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="stopButtonTapped:" destination="ctp-CE-mvd" eventType="touchUpInside" id="vcK-rD-csv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="hVx-B9-uF8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ygg-jp-q3s" firstAttribute="centerY" secondItem="hVx-B9-uF8" secondAttribute="centerY" constant="144" id="ASc-7P-Xtn"/>
+                            <constraint firstItem="ygg-jp-q3s" firstAttribute="centerX" secondItem="hVx-B9-uF8" secondAttribute="centerX" id="f9v-x4-wTq"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="N1r-aR-q3f"/>
+                    <connections>
+                        <outlet property="stopButton" destination="ygg-jp-q3s" id="80x-YN-fe1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YO6-bW-TRt" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,6 +202,7 @@
     </scenes>
     <resources>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Light Field  Background">
             <color red="0.94901960784313721" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
