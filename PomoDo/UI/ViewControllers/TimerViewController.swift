@@ -25,8 +25,9 @@ final class TimerViewController: UIViewController {
     }
     private var secondsElapsed: Double = 0 {
         didSet {
-            let minutes = (secondsElapsed / 60).rounded(.down)
-            let seconds = secondsElapsed - minutes * 60
+            let remainingSeconds = focusTimeInSeconds - secondsElapsed
+            let minutes = (remainingSeconds / 60).rounded(.down)
+            let seconds = remainingSeconds - minutes * 60
             timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
         }
     }
@@ -39,6 +40,7 @@ final class TimerViewController: UIViewController {
         
         navigationItem.setHidesBackButton(true, animated: true)
         
+        secondsElapsed = 0
         
         setupTimerProgressBar()
         
