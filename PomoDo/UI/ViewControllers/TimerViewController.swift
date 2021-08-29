@@ -10,6 +10,7 @@ import UIKit
 final class TimerViewController: UIViewController {
     
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
     
     var task: Task!
     
@@ -17,6 +18,18 @@ final class TimerViewController: UIViewController {
     private var trackLayer = CAShapeLayer()
     
     private var timer: Timer?
+    
+    private let focusTimeInMinutes: Double = 25
+    private var focusTimeInSeconds: Double {
+        return focusTimeInMinutes * 60
+    }
+    private var secondsElapsed: Double = 0 {
+        didSet {
+            let minutes = (secondsElapsed / 60).rounded(.down)
+            let seconds = secondsElapsed - minutes * 60
+            timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
+        }
+    }
     
     // MARK: - UIViewController
     override func viewDidLoad() {
@@ -29,9 +42,7 @@ final class TimerViewController: UIViewController {
         
         setupTimerProgressBar()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 20 * 60, repeats: true, block: { _ in
-            self.progressLayer.strokeEnd += 0.1
-        })
+        startWorkTimer()
     }
     
     // MARK: - IBActions
@@ -41,13 +52,47 @@ final class TimerViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self]  _ in
             self?.navigationController?.popViewController(animated: true)
         }))
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
+            self?.startWorkTimer()
+        }))
         
-        present(ac, animated: true)
+        present(ac, animated: true) { [weak self] in
+            self?.timer?.invalidate()
+        }
     }
     
     
     // MARK: - Private Methods
+    private func checkElapsedTime() {
+        if focusTimeInSeconds - secondsElapsed <= 0 {
+            self.timer?.invalidate()
+            
+            let ac = UIAlertController(title: "Yay! You've done it!", message: "It's time for the short rest now", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "Rest", style: .default, handler: { [weak self]  _ in
+                self?.startRestTimer()
+            }))
+            ac.addAction(UIAlertAction(title: "Leave", style: .cancel, handler: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }))
+            
+            present(ac, animated: true)
+        }
+    }
+    
+    private func startRestTimer() {
+        
+    }
+    
+    private func startWorkTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+            guard let `self` = self else { return }
+            self.secondsElapsed += 1.0
+            self.progressLayer.strokeEnd = CGFloat(self.secondsElapsed / self.focusTimeInSeconds)
+            self.checkElapsedTime()
+        })
+    }
+    
     private func setupTimerProgressBar() {
         let circlePath = UIBezierPath(arcCenter: .zero, radius: 100, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
         

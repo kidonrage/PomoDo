@@ -130,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660.86956521739137" y="94.419642857142847"/>
+            <point key="canvasLocation" x="572" y="94"/>
         </scene>
         <!--Timer View Controller-->
         <scene sceneID="iuX-5G-9jh">
@@ -164,17 +164,26 @@
                                     <action selector="stopButtonTapped:" destination="ctp-CE-mvd" eventType="touchUpInside" id="vcK-rD-csv"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpC-XT-Mee">
+                                <rect key="frame" x="163.5" y="429" width="87" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hVx-B9-uF8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ygg-jp-q3s" firstAttribute="centerY" secondItem="hVx-B9-uF8" secondAttribute="centerY" constant="144" id="ASc-7P-Xtn"/>
+                            <constraint firstItem="OpC-XT-Mee" firstAttribute="centerY" secondItem="ZqY-Of-9MN" secondAttribute="centerY" id="N6U-ca-klX"/>
+                            <constraint firstItem="OpC-XT-Mee" firstAttribute="centerX" secondItem="hVx-B9-uF8" secondAttribute="centerX" id="XE0-m9-00M"/>
                             <constraint firstItem="ygg-jp-q3s" firstAttribute="centerX" secondItem="hVx-B9-uF8" secondAttribute="centerX" id="f9v-x4-wTq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="N1r-aR-q3f"/>
                     <connections>
                         <outlet property="stopButton" destination="ygg-jp-q3s" id="80x-YN-fe1"/>
+                        <outlet property="timeLabel" destination="OpC-XT-Mee" id="ZEq-iJ-rD4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YO6-bW-TRt" sceneMemberID="firstResponder"/>
