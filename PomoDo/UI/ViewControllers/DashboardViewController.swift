@@ -8,8 +8,9 @@
 import UIKit
 
 class DashboardViewController: UIViewController {
-
+    
     @IBOutlet weak var todayWorkedLabel: UILabel!
+    @IBOutlet weak var newTaskView: UIView!
     @IBOutlet weak var newTaskField: UITextField!
     @IBOutlet weak var tasksTableView: UITableView!
     @IBOutlet weak var playNewTaskButton: UIButton!
@@ -21,14 +22,17 @@ class DashboardViewController: UIViewController {
         Task(name: "Шабить"),
         Task(name: "Дрочить"),
     ]
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupTable()
         setupUI()
         
         updateTodayWorkHours(withHoursAmount: 4)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,6 +43,32 @@ class DashboardViewController: UIViewController {
             else { return }
             
             vc.task = selectedTask
+        }
+    }
+    
+    @IBAction func taskNameDidChanged(_ sender: UITextField) {
+        if sender.text?.isEmpty ?? true {
+            playNewTaskButton.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        } else {
+            playNewTaskButton.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+    }
+    
+    @IBAction func tableTapped(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height - view.safeAreaInsets.bottom
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
         }
     }
     
