@@ -25,12 +25,25 @@ class DashboardViewController: UIViewController {
         setupTable()
         setupUI()
         
-        getTasks()
+        updateTasks()
         
         updateTodayWorkHours(withHoursAmount: 4)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateTasks()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,8 +106,10 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    private func getTasks() {
+    private func updateTasks() {
         tasks = TasksManager.shared.getAllTasks()
+        
+        tasksTableView.reloadData()
     }
     
     private func updateTodayWorkHours(withHoursAmount hoursAmount: Int) {

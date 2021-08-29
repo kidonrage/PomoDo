@@ -19,6 +19,7 @@ final class TimerViewController: UIViewController {
     
     private var timer: Timer?
     
+    private let focusSpeeder: Double = 100.0
     private let focusTimeInMinutes: Double = 25
     private var focusTimeInSeconds: Double {
         return focusTimeInMinutes * 60
@@ -67,19 +68,25 @@ final class TimerViewController: UIViewController {
     // MARK: - Private Methods
     private func checkElapsedTime() {
         if focusTimeInSeconds - secondsElapsed <= 0 {
-            self.timer?.invalidate()
-            
-            let ac = UIAlertController(title: "Yay! You've done it!", message: "It's time for the short rest now", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "Rest", style: .default, handler: { [weak self]  _ in
-                self?.startRestTimer()
-            }))
-            ac.addAction(UIAlertAction(title: "Leave", style: .cancel, handler: { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
-            }))
-            
-            present(ac, animated: true)
+            finishWorkSession()
         }
+    }
+    
+    private func finishWorkSession() {
+        self.timer?.invalidate()
+        
+        TasksManager.shared.saveTask(task)
+        
+        let ac = UIAlertController(title: "Yay! You've done it!", message: "It's time for the short rest now", preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "Rest", style: .default, handler: { [weak self]  _ in
+            self?.startRestTimer()
+        }))
+        ac.addAction(UIAlertAction(title: "Leave", style: .cancel, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        
+        present(ac, animated: true)
     }
     
     private func startRestTimer() {
@@ -87,7 +94,7 @@ final class TimerViewController: UIViewController {
     }
     
     private func startWorkTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0 / focusSpeeder, repeats: true, block: { [weak self] _ in
             guard let `self` = self else { return }
             self.secondsElapsed += 1.0
             self.progressLayer.strokeEnd = CGFloat(self.secondsElapsed / self.focusTimeInSeconds)

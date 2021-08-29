@@ -12,7 +12,7 @@ final class TasksManager {
     private let tasksKey = "tasks"
         
     func getAllTasks() -> [Task]? {
-        guard let tasksData = UserDefaults.standard.data(forKey: tasksKey) else { return nil }
+        guard let tasksData = UserDefaults.standard.data(forKey: tasksKey) else { return [] }
         
         let decoder = JSONDecoder()
     
@@ -25,7 +25,6 @@ final class TasksManager {
     
     func saveTask(_ task: Task) {
         guard var tasksToUpdate = getAllTasks() else { return }
-        
         
         tasksToUpdate.append(task)
         
