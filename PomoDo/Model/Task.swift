@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Task {
+struct Task: Codable {
     
-    let name: String
+    let title: String
+    let executionTimeStamp: TimeInterval
 }

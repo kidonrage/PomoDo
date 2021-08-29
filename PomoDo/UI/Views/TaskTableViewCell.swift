@@ -24,7 +24,7 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     public func configure(with task: Task) {
-        taskLabel.text = task.name
+        taskLabel.text = task.title
     }
     
     static let cellId = "TaskTableViewCell"

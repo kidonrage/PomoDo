@@ -36,7 +36,7 @@ final class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = task.name
+        title = task.title
         
         navigationItem.setHidesBackButton(true, animated: true)
         

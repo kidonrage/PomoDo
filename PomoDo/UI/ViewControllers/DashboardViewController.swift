@@ -17,17 +17,15 @@ class DashboardViewController: UIViewController {
     
     private var selectedTask: Task?
     
-    private var tasks: [Task] = [
-        Task(name: "Курить"),
-        Task(name: "Шабить"),
-        Task(name: "Дрочить"),
-    ]
+    private var tasks: [Task]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTable()
         setupUI()
+        
+        getTasks()
         
         updateTodayWorkHours(withHoursAmount: 4)
         
@@ -46,10 +44,13 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    // MARK: - IBACtions
     @IBAction func taskNameDidChanged(_ sender: UITextField) {
         if sender.text?.isEmpty ?? true {
+            playNewTaskButton.isEnabled = false
             playNewTaskButton.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         } else {
+            playNewTaskButton.isEnabled = true
             playNewTaskButton.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         }
     }
@@ -58,7 +59,27 @@ class DashboardViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @IBAction func executeNewTaskTapped(_ sender: Any) {
+        guard
+            let newTaskTitle = newTaskField.text,
+            !newTaskTitle.isEmpty
+        else {
+            return
+        }
+        
+        let newTask = Task(title: newTaskTitle, executionTimeStamp: Date().timeIntervalSince1970)
+        selectedTask = newTask
+        
+        view.endEditing(true)
+        
+        performSegue(withIdentifier: "toFocus", sender: self)
+        
+        newTaskField.text = nil
+    }
+    
+    // MARK: - Private Methods
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height - view.safeAreaInsets.bottom
@@ -66,10 +87,14 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+    }
+    
+    private func getTasks() {
+        tasks = TasksManager.shared.getAllTasks()
     }
     
     private func updateTodayWorkHours(withHoursAmount hoursAmount: Int) {
@@ -101,11 +126,14 @@ class DashboardViewController: UIViewController {
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return tasks?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.cellId) as? TaskTableViewCell else {
+        guard
+            let tasks = tasks,
+            let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.cellId) as? TaskTableViewCell
+        else {
             return UITableViewCell()
         }
         
@@ -117,6 +145,8 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let tasks = tasks else { return }
+        
         selectedTask = tasks[indexPath.row]
         performSegue(withIdentifier: "toFocus", sender: self)
     }

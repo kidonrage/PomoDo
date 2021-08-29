@@ -18,6 +18,8 @@
 		C63FB4A426D112890099FB46 /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C63FB4A226D112890099FB46 /* TaskTableViewCell.xib */; };
 		C63FB4A726D115710099FB46 /* UIView+Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB4A626D115710099FB46 /* UIView+Designable.swift */; };
 		C63FB4AA26D1187D0099FB46 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB4A926D1187D0099FB46 /* Task.swift */; };
+		C6A70AA926DBB7C00055D6A8 /* TasksStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A70AA826DBB7C00055D6A8 /* TasksStorage.swift */; };
+		C6A70AAC26DBB80E0055D6A8 /* TasksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A70AAB26DBB80E0055D6A8 /* TasksManager.swift */; };
 		C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		C63FB4A226D112890099FB46 /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
 		C63FB4A626D115710099FB46 /* UIView+Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Designable.swift"; sourceTree = "<group>"; };
 		C63FB4A926D1187D0099FB46 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C6A70AA826DBB7C00055D6A8 /* TasksStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksStorage.swift; sourceTree = "<group>"; };
+		C6A70AAB26DBB80E0055D6A8 /* TasksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksManager.swift; sourceTree = "<group>"; };
 		C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +72,7 @@
 		C63FB48526D110330099FB46 /* PomoDo */ = {
 			isa = PBXGroup;
 			children = (
+				C6A70AAA26DBB8050055D6A8 /* Tools */,
 				C63FB4A826D118730099FB46 /* Model */,
 				C63FB4A526D115640099FB46 /* Extensions */,
 				C63FB49F26D112650099FB46 /* UI */,
@@ -121,8 +126,17 @@
 			isa = PBXGroup;
 			children = (
 				C63FB4A926D1187D0099FB46 /* Task.swift */,
+				C6A70AA826DBB7C00055D6A8 /* TasksStorage.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C6A70AAA26DBB8050055D6A8 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				C6A70AAB26DBB80E0055D6A8 /* TasksManager.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +212,8 @@
 			files = (
 				C63FB49E26D110910099FB46 /* TimerViewController.swift in Sources */,
 				C63FB48726D110330099FB46 /* AppDelegate.swift in Sources */,
+				C6A70AAC26DBB80E0055D6A8 /* TasksManager.swift in Sources */,
+				C6A70AA926DBB7C00055D6A8 /* TasksStorage.swift in Sources */,
 				C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */,
 				C63FB4A726D115710099FB46 /* UIView+Designable.swift in Sources */,
 				C63FB4A326D112890099FB46 /* TaskTableViewCell.swift in Sources */,
