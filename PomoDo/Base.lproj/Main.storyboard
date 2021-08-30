@@ -80,7 +80,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <gestureRecognizers/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="X7i-ns-YFK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncJ-29-LNC">
@@ -106,20 +106,11 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Недавние" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgT-Yo-mxz">
-                                            <rect key="frame" x="16" y="104" width="382" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ncJ-29-LNC" secondAttribute="trailing" constant="16" id="1wj-O2-Onm"/>
-                                        <constraint firstAttribute="trailing" secondItem="OgT-Yo-mxz" secondAttribute="trailing" constant="16" id="CkH-kq-zHJ"/>
-                                        <constraint firstItem="OgT-Yo-mxz" firstAttribute="top" secondItem="ncJ-29-LNC" secondAttribute="bottom" constant="24" id="Egc-dK-XZN"/>
                                         <constraint firstItem="ncJ-29-LNC" firstAttribute="top" secondItem="X7i-ns-YFK" secondAttribute="top" constant="16" id="VOd-sl-dVf"/>
-                                        <constraint firstItem="OgT-Yo-mxz" firstAttribute="leading" secondItem="X7i-ns-YFK" secondAttribute="leading" constant="16" id="gsd-qy-eMm"/>
                                         <constraint firstItem="ncJ-29-LNC" firstAttribute="leading" secondItem="X7i-ns-YFK" secondAttribute="leading" constant="16" id="kTf-Ch-fIh"/>
                                     </constraints>
                                 </view>
@@ -158,7 +149,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="572" y="94"/>
+            <point key="canvasLocation" x="571.01449275362324" y="93.75"/>
         </scene>
         <!--Timer View Controller-->
         <scene sceneID="iuX-5G-9jh">

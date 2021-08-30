@@ -20,6 +20,8 @@
 		C63FB4AA26D1187D0099FB46 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB4A926D1187D0099FB46 /* Task.swift */; };
 		C6A70AA926DBB7C00055D6A8 /* TasksStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A70AA826DBB7C00055D6A8 /* TasksStorage.swift */; };
 		C6A70AAC26DBB80E0055D6A8 /* TasksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A70AAB26DBB80E0055D6A8 /* TasksManager.swift */; };
+		C6A70AAE26DBD7E80055D6A8 /* Date+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A70AAD26DBD7E80055D6A8 /* Date+ext.swift */; };
+		C6A70AB026DD8A790055D6A8 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A70AAF26DD8A790055D6A8 /* TaskViewModel.swift */; };
 		C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		C63FB4A926D1187D0099FB46 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C6A70AA826DBB7C00055D6A8 /* TasksStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksStorage.swift; sourceTree = "<group>"; };
 		C6A70AAB26DBB80E0055D6A8 /* TasksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksManager.swift; sourceTree = "<group>"; };
+		C6A70AAD26DBD7E80055D6A8 /* Date+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ext.swift"; sourceTree = "<group>"; };
+		C6A70AAF26DD8A790055D6A8 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		C6DA95C126D29CBA00348CDE /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				C63FB4A626D115710099FB46 /* UIView+Designable.swift */,
+				C6A70AAD26DBD7E80055D6A8 /* Date+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			children = (
 				C63FB4A926D1187D0099FB46 /* Task.swift */,
 				C6A70AA826DBB7C00055D6A8 /* TasksStorage.swift */,
+				C6A70AAF26DD8A790055D6A8 /* TaskViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,12 +217,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C63FB49E26D110910099FB46 /* TimerViewController.swift in Sources */,
+				C6A70AB026DD8A790055D6A8 /* TaskViewModel.swift in Sources */,
 				C63FB48726D110330099FB46 /* AppDelegate.swift in Sources */,
 				C6A70AAC26DBB80E0055D6A8 /* TasksManager.swift in Sources */,
 				C6A70AA926DBB7C00055D6A8 /* TasksStorage.swift in Sources */,
 				C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */,
 				C63FB4A726D115710099FB46 /* UIView+Designable.swift in Sources */,
 				C63FB4A326D112890099FB46 /* TaskTableViewCell.swift in Sources */,
+				C6A70AAE26DBD7E80055D6A8 /* Date+ext.swift in Sources */,
 				C63FB48926D110330099FB46 /* SceneDelegate.swift in Sources */,
 				C63FB4AA26D1187D0099FB46 /* Task.swift in Sources */,
 				C63FB49C26D110890099FB46 /* DashboardViewController.swift in Sources */,

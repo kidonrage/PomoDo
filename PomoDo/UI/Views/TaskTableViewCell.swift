@@ -23,8 +23,8 @@ class TaskTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func configure(with task: Task) {
-        taskLabel.text = task.title
+    public func configure(with taskViewModel: TaskViewModel) {
+        taskLabel.text = taskViewModel.taskTitle
     }
     
     static let cellId = "TaskTableViewCell"

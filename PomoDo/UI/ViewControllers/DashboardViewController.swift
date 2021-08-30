@@ -18,6 +18,7 @@ class DashboardViewController: UIViewController {
     private var selectedTask: Task?
     
     private var tasks: [Task]?
+    private var sectionsToDisplay: [Dictionary<String, [TaskViewModel]>.Element]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,9 +108,75 @@ class DashboardViewController: UIViewController {
     }
     
     private func updateTasks() {
-        tasks = TasksManager.shared.getAllTasks()
+        guard let allTasks = TasksManager.shared.getAllTasks()?.sorted(by: { $0.executionTimeStamp > $1.executionTimeStamp }) else { return }
         
+        var dict: [String: [Task]] = [:]
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM.dd.yyyy"
+        dateFormatter.locale = Locale(identifier: "en-EN")
+        
+        let today = Date().startOfDay
+        
+        let todayTasksKey = "Recent"
+        
+        allTasks.forEach { (task) in
+            if dateFormatter.string(from: Date(timeIntervalSince1970: task.executionTimeStamp)) == dateFormatter.string(from: today) {
+                var applicationsForToday = dict[todayTasksKey] ?? []
+                applicationsForToday.append(task)
+                dict[todayTasksKey] = applicationsForToday
+            } else {
+                let dateStringToDisplay = dateFormatter.string(from: Date(timeIntervalSince1970: task.executionTimeStamp))
+
+                var applications = dict[dateStringToDisplay] ?? []
+                applications.append(task)
+                dict[dateStringToDisplay] = applications
+            }
+        }
+        
+        var updatedSectionsToDisplay = [String : [TaskViewModel]]()
+        
+        dict
+            .forEach { (dateKey, tasksForDate) in
+                var tasksTimeWorked: [String: (TimeInterval, TimeInterval)] = [:]
+                
+                tasksForDate
+                    .sorted(by: { $0.executionTimeStamp < $1.executionTimeStamp })
+                    .forEach { task in
+                        tasksTimeWorked[task.title] = ((tasksTimeWorked[task.title]?.0 ?? 0) + 25.0, task.executionTimeStamp)
+                    }
+                
+                tasksTimeWorked.forEach { (taskTitle, taskWorkedTime) in
+                    updatedSectionsToDisplay[dateKey] = (updatedSectionsToDisplay[dateKey] ?? []) + [TaskViewModel(taskTitle: taskTitle, workedTime: taskWorkedTime.0, lastExecutionTimestamp: taskWorkedTime.1)]
+                }
+            }
+        
+        self.sectionsToDisplay = updatedSectionsToDisplay
+            .sorted(by: { (keyValueA, keyValueB) in
+                if keyValueA.key == todayTasksKey {
+                    return true
+                } else if keyValueB.key == todayTasksKey {
+                    return false
+                }
+
+                let dateA = dateFormatter.date(from: keyValueA.key)!
+                let dateB = dateFormatter.date(from: keyValueB.key)!
+
+                return dateA < dateB
+            })
+            .map({ (key, value) in
+                return (key: key, value: value.sorted(by: { $0.lastExecutionTimestamp > $1.lastExecutionTimestamp }))
+            })
+        
+//        updateTodayWorkedHours(tasksExecutedToday: sections?[0].value ?? [])
+
         tasksTableView.reloadData()
+    }
+    
+    private func updateTodayWorkedHours(tasksExecutedToday: [Task]) {
+        let hoursWorkedToday = tasksExecutedToday.reduce(0.0) { result, _ in result + (25 / 60) }
+        
+        updateTodayWorkHours(withHoursAmount: Int(hoursWorkedToday.rounded(.down)))
     }
     
     private func updateTodayWorkHours(withHoursAmount hoursAmount: Int) {
@@ -141,28 +208,48 @@ class DashboardViewController: UIViewController {
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks?.count ?? 0
+        return sectionsToDisplay?[section].value.count ?? 0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionsToDisplay?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let tasks = tasks,
-            let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.cellId) as? TaskTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.cellId) as? TaskTableViewCell,
+            let taskViewModel = sectionsToDisplay?[indexPath.section].value[indexPath.row]
         else {
             return UITableViewCell()
         }
         
-        let task = tasks[indexPath.row]
-        
-        cell.configure(with: task)
+        cell.configure(with: taskViewModel)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let tasks = tasks else { return }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: 48)))
+        view.backgroundColor = .systemBackground
         
-        selectedTask = tasks[indexPath.row]
+        let label = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 4), size: CGSize(width: view.frame.width - 32, height: 40)))
+        label.text = sectionsToDisplay?[section].key
+        label.font = .boldSystemFont(ofSize: 16)
+        
+        view.addSubview(label)
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 48
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let taskViewModel = sectionsToDisplay?[indexPath.section].value[indexPath.row] else { return }
+        
+        selectedTask = Task(title: taskViewModel.taskTitle, executionTimeStamp: Date().timeIntervalSince1970)
+        
         performSegue(withIdentifier: "toFocus", sender: self)
     }
 }
