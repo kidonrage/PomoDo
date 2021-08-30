@@ -27,8 +27,6 @@ class DashboardViewController: UIViewController {
         setupUI()
         
         updateTasks()
-        
-        updateTodayWorkHours(withHoursAmount: 4)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,7 +141,7 @@ class DashboardViewController: UIViewController {
                 tasksForDate
                     .sorted(by: { $0.executionTimeStamp < $1.executionTimeStamp })
                     .forEach { task in
-                        tasksTimeWorked[task.title] = ((tasksTimeWorked[task.title]?.0 ?? 0) + 25.0, task.executionTimeStamp)
+                        tasksTimeWorked[task.title] = ((tasksTimeWorked[task.title]?.0 ?? 0) + 25.0 * 60.0, task.executionTimeStamp)
                     }
                 
                 tasksTimeWorked.forEach { (taskTitle, taskWorkedTime) in
@@ -168,23 +166,31 @@ class DashboardViewController: UIViewController {
                 return (key: key, value: value.sorted(by: { $0.lastExecutionTimestamp > $1.lastExecutionTimestamp }))
             })
         
-//        updateTodayWorkedHours(tasksExecutedToday: sections?[0].value ?? [])
+        updateTodayWorkedHours(tasksExecutedToday: self.sectionsToDisplay?[0].value ?? [])
 
         tasksTableView.reloadData()
     }
     
-    private func updateTodayWorkedHours(tasksExecutedToday: [Task]) {
-        let hoursWorkedToday = tasksExecutedToday.reduce(0.0) { result, _ in result + (25 / 60) }
-        
-        updateTodayWorkHours(withHoursAmount: Int(hoursWorkedToday.rounded(.down)))
+    private func updateTodayWorkedHours(tasksExecutedToday: [TaskViewModel]) {
+        let secondsWorkedToday = tasksExecutedToday.reduce(0.0) { result, task in result + (task.workedTime) }
+        updateTodayWorkHours(withWorkedSecondsAmount: Int(secondsWorkedToday))
     }
     
-    private func updateTodayWorkHours(withHoursAmount hoursAmount: Int) {
+    private func updateTodayWorkHours(withWorkedSecondsAmount secondsAmount: Int) {
         let string = NSMutableAttributedString(string: "Сегодня вы работали ")
         
-        string.append(NSAttributedString(string: "\(hoursAmount)ч", attributes: [
+        let hours = Int(secondsAmount / 3600)
+        let minutes = Int((secondsAmount - (hours * 3600)) / 60)
+        
+        string.append(NSAttributedString(string: "\(hours)ч", attributes: [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
         ]))
+        
+        if minutes > 0 {
+            string.append(NSAttributedString(string: " \(minutes)мин", attributes: [
+                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
+            ]))
+        }
         
         todayWorkedLabel.attributedText = string
     }
