@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C629FAAF26DEC0420076D442 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629FAAE26DEC0420076D442 /* UserSettingsManager.swift */; };
 		C63FB48726D110330099FB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB48626D110330099FB46 /* AppDelegate.swift */; };
 		C63FB48926D110330099FB46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FB48826D110330099FB46 /* SceneDelegate.swift */; };
 		C63FB48E26D110330099FB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C63FB48C26D110330099FB46 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C629FAAE26DEC0420076D442 /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
 		C63FB48326D110330099FB46 /* PomoDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63FB48626D110330099FB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C63FB48826D110330099FB46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				C6A70AAB26DBB80E0055D6A8 /* TasksManager.swift */,
+				C629FAAE26DEC0420076D442 /* UserSettingsManager.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				C6A70AAC26DBB80E0055D6A8 /* TasksManager.swift in Sources */,
 				C6A70AA926DBB7C00055D6A8 /* TasksStorage.swift in Sources */,
 				C6DA95C226D29CBA00348CDE /* CircularProgressView.swift in Sources */,
+				C629FAAF26DEC0420076D442 /* UserSettingsManager.swift in Sources */,
 				C63FB4A726D115710099FB46 /* UIView+Designable.swift in Sources */,
 				C63FB4A326D112890099FB46 /* TaskTableViewCell.swift in Sources */,
 				C6A70AAE26DBD7E80055D6A8 /* Date+ext.swift in Sources */,

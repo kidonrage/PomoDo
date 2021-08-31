@@ -145,7 +145,7 @@ class DashboardViewController: UIViewController {
                 tasksForDate
                     .sorted(by: { $0.executionTimeStamp < $1.executionTimeStamp })
                     .forEach { task in
-                        tasksTimeWorked[task.title] = ((tasksTimeWorked[task.title]?.0 ?? 0) + 25.0 * 60.0, task.executionTimeStamp)
+                        tasksTimeWorked[task.title] = ((tasksTimeWorked[task.title]?.0 ?? 0) + UserSettingsManager.shared.workSessionDuration, task.executionTimeStamp)
                     }
                 
                 tasksTimeWorked.forEach { (taskTitle, taskWorkedTime) in
