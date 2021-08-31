@@ -114,9 +114,6 @@
                                         <constraint firstItem="ncJ-29-LNC" firstAttribute="leading" secondItem="X7i-ns-YFK" secondAttribute="leading" constant="16" id="kTf-Ch-fIh"/>
                                     </constraints>
                                 </view>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="fWF-df-Q1N" appends="YES" id="7jq-8U-lIz"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -143,11 +140,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer cancelsTouchesInView="NO" id="fWF-df-Q1N">
-                    <connections>
-                        <action selector="tableTapped:" destination="BYZ-38-t0r" id="a3g-OI-WI3"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="571.01449275362324" y="93.75"/>
         </scene>

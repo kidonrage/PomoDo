@@ -15,6 +15,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var tasksTableView: UITableView!
     @IBOutlet weak var playNewTaskButton: UIButton!
     
+    private lazy var dismissKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    
     private var selectedTask: Task?
     
     private var tasks: [Task]?
@@ -22,6 +24,8 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dismissKeyboardGesture.delegate = self
         
         setupTable()
         setupUI()
@@ -67,7 +71,7 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    @IBAction func tableTapped(_ sender: Any) {
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -205,7 +209,9 @@ class DashboardViewController: UIViewController {
     }
     
     private func setupUI() {
+        view.backgroundColor = .systemBackground
         
+        tasksTableView.addGestureRecognizer(dismissKeyboardGesture)
     }
 }
 
@@ -256,6 +262,20 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         
         selectedTask = Task(title: taskViewModel.taskTitle, executionTimeStamp: Date().timeIntervalSince1970)
         
+        dismissKeyboard()
+        
         performSegue(withIdentifier: "toFocus", sender: self)
     }
+}
+
+
+extension DashboardViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isKind(of: UITableView.self) ?? true {
+            return true
+        }
+        return false
+    }
+    
 }
