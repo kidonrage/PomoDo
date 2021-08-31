@@ -19,7 +19,7 @@ final class TimerViewController: UIViewController {
     
     private var timer: Timer?
     
-    private let focusSpeeder: Double = 100.0
+    private let focusSpeeder: Double = 1.0
     
     private let focusTimeInMinutes: Double = 25
     private var focusTimeInSeconds: Double {
@@ -135,6 +135,8 @@ final class TimerViewController: UIViewController {
     }
     
     fileprivate func continueRestTimer() {
+        self.progressLayer.strokeEnd = CGFloat(self.restSecondsElapsed / self.restTimeInSeconds)
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1.0 / focusSpeeder, repeats: true, block: { [weak self] _ in
             guard let `self` = self else { return }
             self.restSecondsElapsed += 1.0
@@ -144,8 +146,8 @@ final class TimerViewController: UIViewController {
     }
     
     private func startRestTimer() {
-        isResting = true
         restSecondsElapsed = 0
+        isResting = true
         
         title = "\(task.title) – rest"
         
@@ -153,6 +155,8 @@ final class TimerViewController: UIViewController {
     }
     
     fileprivate func continueWorkTimer() {
+        self.progressLayer.strokeEnd = CGFloat(self.workSecondsElapsed / self.focusTimeInSeconds)
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1.0 / focusSpeeder, repeats: true, block: { [weak self] _ in
             guard let `self` = self else { return }
             self.workSecondsElapsed += 1.0
@@ -162,8 +166,8 @@ final class TimerViewController: UIViewController {
     }
     
     private func startWorkTimer() {
-        isResting = false
         workSecondsElapsed = 0
+        isResting = false
         
         continueWorkTimer()
     }
