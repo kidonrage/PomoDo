@@ -9,35 +9,30 @@ import UIKit
 
 final class TimerViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var sessionTypeLabel: UILabel!
     
+    // MARK: - Public Properties
     var task: Task!
     
+    // MARK: - Private Properties
     private var progressLayer = CAShapeLayer()
     private var trackLayer = CAShapeLayer()
     
     private var timer: Timer?
     
-    private let focusSpeeder: Double = 10.0
+    private var workSessionStartTime: TimeInterval?
+    private var restSessionStartTime: TimeInterval?
     
-    private var workSecondsElapsed: Double = 0 {
-        didSet {
-            let remainingSeconds = UserSettingsManager.shared.workSessionDuration - workSecondsElapsed
-            let minutes = (remainingSeconds / 60).rounded(.down)
-            let seconds = remainingSeconds - minutes * 60
-            timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
-        }
+    private var workSecondsElapsed: Double {
+        guard let workSessionStartTime = self.workSessionStartTime else { return 0 }
+        return Date().timeIntervalSince1970 - workSessionStartTime
     }
-    
-    private var restSecondsElapsed: Double = 0 {
-        didSet {
-            let remainingSeconds = UserSettingsManager.shared.restSessionDuration - restSecondsElapsed
-            let minutes = (remainingSeconds / 60).rounded(.down)
-            let seconds = remainingSeconds - minutes * 60
-            timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
-        }
+    private var restSecondsElapsed: Double {
+        guard let restSessionStartTime = self.restSessionStartTime else { return 0 }
+        return Date().timeIntervalSince1970 - restSessionStartTime
     }
     
     private var isResting = false {
@@ -54,8 +49,6 @@ final class TimerViewController: UIViewController {
         title = task.title
         
         navigationItem.setHidesBackButton(true, animated: true)
-        
-        workSecondsElapsed = 0
         
         setupTimerProgressBar()
         
@@ -84,18 +77,6 @@ final class TimerViewController: UIViewController {
     
     
     // MARK: - Private Methods
-    private func checkElapsedTime() {
-        if isResting {
-            if UserSettingsManager.shared.restSessionDuration - restSecondsElapsed <= 0 {
-                finishRestSession()
-            }
-        } else {
-            if UserSettingsManager.shared.workSessionDuration - workSecondsElapsed <= 0 {
-                finishWorkSession()
-            }
-        }
-    }
-    
     private func finishWorkSession() {
         self.timer?.invalidate()
         
@@ -128,37 +109,63 @@ final class TimerViewController: UIViewController {
         present(ac, animated: true)
     }
     
-    fileprivate func continueRestTimer() {
+    private func checkRestTimer() {
+        let remainingSeconds = (UserSettingsManager.shared.restSessionDuration - self.restSecondsElapsed).rounded()
+        
+        let minutes = (remainingSeconds / 60).rounded(.down)
+        let seconds = remainingSeconds - minutes * 60
+        self.timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
+        
         self.progressLayer.strokeEnd = CGFloat(self.restSecondsElapsed / UserSettingsManager.shared.restSessionDuration)
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0 / focusSpeeder, repeats: true, block: { [weak self] _ in
+        if UserSettingsManager.shared.restSessionDuration - self.restSecondsElapsed <= 0 {
+            self.finishRestSession()
+        }
+    }
+    
+    fileprivate func continueRestTimer() {
+        checkRestTimer()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
             guard let `self` = self else { return }
-            self.restSecondsElapsed += 1.0
-            self.progressLayer.strokeEnd = CGFloat(self.restSecondsElapsed / UserSettingsManager.shared.restSessionDuration)
-            self.checkElapsedTime()
+            
+            self.checkRestTimer()
         })
     }
     
     private func startRestTimer() {
-        restSecondsElapsed = 0
+        restSessionStartTime = Date().timeIntervalSince1970
         isResting = true
         
         continueRestTimer()
     }
     
-    fileprivate func continueWorkTimer() {
+    private func checkWorkTimer() {
+        let remainingSeconds = (UserSettingsManager.shared.workSessionDuration - self.workSecondsElapsed).rounded()
+        
+        let minutes = (remainingSeconds / 60).rounded(.down)
+        let seconds = remainingSeconds - minutes * 60
+        self.timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
+        
         self.progressLayer.strokeEnd = CGFloat(self.workSecondsElapsed / UserSettingsManager.shared.workSessionDuration)
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0 / focusSpeeder, repeats: true, block: { [weak self] _ in
+        if remainingSeconds <= 0 {
+            self.finishWorkSession()
+        }
+    }
+    
+    fileprivate func continueWorkTimer() {
+        checkWorkTimer()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
             guard let `self` = self else { return }
-            self.workSecondsElapsed += 1.0
-            self.progressLayer.strokeEnd = CGFloat(self.workSecondsElapsed / UserSettingsManager.shared.workSessionDuration)
-            self.checkElapsedTime()
+            
+            self.checkWorkTimer()
         })
     }
     
     private func startWorkTimer() {
-        workSecondsElapsed = 0
+        workSessionStartTime = Date().timeIntervalSince1970
         isResting = false
         
         continueWorkTimer()

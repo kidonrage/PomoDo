@@ -14,5 +14,4 @@ final class UserSettingsManager {
     
     // MARK: - Constants
     static let shared = UserSettingsManager()
-    
 }
