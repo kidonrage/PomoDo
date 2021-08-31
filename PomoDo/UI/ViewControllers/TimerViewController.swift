@@ -50,7 +50,7 @@ final class TimerViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func stopButtonTapped(_ sender: Any) {
-        let ac = UIAlertController(title: "Stopping the timer will delete your progress in this focus session", message: "Are You sure?", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Are You sure?", message: "Stopping the timer will delete your progress in this focus session", preferredStyle: .alert)
         
         ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self]  _ in
             self?.navigationController?.popViewController(animated: true)
@@ -108,7 +108,7 @@ final class TimerViewController: UIViewController {
         // Add track layer
         trackLayer.path = circlePath.cgPath
         trackLayer.fillColor = UIColor.clear.cgColor
-        trackLayer.strokeColor = UIColor.black.cgColor
+        trackLayer.strokeColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1).cgColor
         trackLayer.lineWidth = 10.0
         trackLayer.strokeEnd = 1.0
         trackLayer.position = view.center
@@ -118,7 +118,7 @@ final class TimerViewController: UIViewController {
         // Add progress layer
         progressLayer.path = circlePath.cgPath
         progressLayer.fillColor = UIColor.clear.cgColor
-        progressLayer.strokeColor = UIColor.systemGreen.cgColor
+        progressLayer.strokeColor = #colorLiteral(red: 0.4431372549, green: 1, blue: 0.5450980392, alpha: 1).cgColor
         progressLayer.lineWidth = 10.0
         progressLayer.strokeEnd = 0
         progressLayer.position = view.center

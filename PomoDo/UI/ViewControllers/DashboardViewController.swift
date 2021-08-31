@@ -177,17 +177,17 @@ class DashboardViewController: UIViewController {
     }
     
     private func updateTodayWorkHours(withWorkedSecondsAmount secondsAmount: Int) {
-        let string = NSMutableAttributedString(string: "Сегодня вы работали ")
+        let string = NSMutableAttributedString(string: "Today you worked ")
         
         let hours = Int(secondsAmount / 3600)
         let minutes = Int((secondsAmount - (hours * 3600)) / 60)
         
-        string.append(NSAttributedString(string: "\(hours)ч", attributes: [
+        string.append(NSAttributedString(string: "\(hours)h", attributes: [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
         ]))
         
         if minutes > 0 {
-            string.append(NSAttributedString(string: " \(minutes)мин", attributes: [
+            string.append(NSAttributedString(string: " \(minutes)m", attributes: [
                 NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
             ]))
         }
@@ -238,7 +238,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: 48)))
         view.backgroundColor = .systemBackground
         
-        let label = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 4), size: CGSize(width: view.frame.width - 32, height: 40)))
+        let label = UILabel(frame: CGRect(origin: CGPoint(x: 16, y: 4), size: CGSize(width: view.frame.width - 32, height: 44)))
         label.text = sectionsToDisplay?[section].key
         label.font = .boldSystemFont(ofSize: 16)
         

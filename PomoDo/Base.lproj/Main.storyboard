@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Задачи-->
+        <!--Tasks-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="DashboardViewController" customModule="PomoDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,7 +23,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yo-vb-CKZ">
                                         <rect key="frame" x="20" y="20" width="378" height="44"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавить задачу" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gP-6y-Wme">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What are you working on?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gP-6y-Wme">
                                                 <rect key="frame" x="8" y="8" width="322" height="28"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -132,7 +132,7 @@
                             <constraint firstItem="nsx-Y0-ghU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uAX-JL-wiI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Задачи" id="Cc4-Hn-jiS"/>
+                    <navigationItem key="navigationItem" title="Tasks" id="Cc4-Hn-jiS"/>
                     <connections>
                         <outlet property="newTaskField" destination="0gP-6y-Wme" id="V72-HT-4x2"/>
                         <outlet property="newTaskView" destination="nsx-Y0-ghU" id="scz-Vu-uaO"/>
@@ -235,7 +235,7 @@
             <color red="0.94901960784313721" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Light Field  Border">
-            <color red="0.66274509803921566" green="0.66666666666666663" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.85882352941176465" green="0.86274509803921573" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
