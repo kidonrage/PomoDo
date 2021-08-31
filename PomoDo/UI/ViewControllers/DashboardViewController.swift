@@ -170,7 +170,11 @@ class DashboardViewController: UIViewController {
                 return (key: key, value: value.sorted(by: { $0.lastExecutionTimestamp > $1.lastExecutionTimestamp }))
             })
         
-        updateTodayWorkedHours(tasksExecutedToday: self.sectionsToDisplay?[0].value ?? [])
+        if let todayWorkedTasks = self.sectionsToDisplay?[0].value, self.sectionsToDisplay?[0].key == todayTasksKey {
+            updateTodayWorkedHours(tasksExecutedToday: todayWorkedTasks)
+        } else {
+            updateTodayWorkedHours(tasksExecutedToday: [])
+        }
 
         tasksTableView.reloadData()
     }
