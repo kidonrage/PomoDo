@@ -11,6 +11,7 @@ final class TimerViewController: UIViewController {
     
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var sessionTypeLabel: UILabel!
     
     var task: Task!
     
@@ -49,6 +50,7 @@ final class TimerViewController: UIViewController {
     
     private var isResting = false {
         didSet {
+            sessionTypeLabel.text = isResting ? "Rest" : "Work"
             progressLayer.strokeColor = isResting ? #colorLiteral(red: 0.4431372549, green: 1, blue: 0.5450980392, alpha: 1).cgColor : #colorLiteral(red: 0.9921568627, green: 0.3019607843, blue: 0.2941176471, alpha: 1).cgColor
         }
     }

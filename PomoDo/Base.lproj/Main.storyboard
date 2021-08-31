@@ -152,7 +152,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygg-jp-q3s">
-                                <rect key="frame" x="184" y="596" width="46" height="46"/>
+                                <rect key="frame" x="184" y="593" width="46" height="46"/>
                                 <color key="backgroundColor" name="Light Field  Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="Ug7-Z6-7Yv"/>
@@ -181,18 +181,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lv4-6V-6Zw">
+                                <rect key="frame" x="32" y="269.5" width="350" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hVx-B9-uF8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ygg-jp-q3s" firstAttribute="centerY" secondItem="hVx-B9-uF8" secondAttribute="centerY" constant="144" id="ASc-7P-Xtn"/>
+                            <constraint firstItem="lv4-6V-6Zw" firstAttribute="centerX" secondItem="hVx-B9-uF8" secondAttribute="centerX" id="0Dk-Go-Aqn"/>
+                            <constraint firstItem="ygg-jp-q3s" firstAttribute="centerY" secondItem="ZqY-Of-9MN" secondAttribute="centerY" constant="168" id="ASc-7P-Xtn"/>
                             <constraint firstItem="OpC-XT-Mee" firstAttribute="centerY" secondItem="ZqY-Of-9MN" secondAttribute="centerY" id="N6U-ca-klX"/>
+                            <constraint firstItem="hVx-B9-uF8" firstAttribute="trailing" secondItem="lv4-6V-6Zw" secondAttribute="trailing" constant="32" id="QKX-Ae-wyF"/>
                             <constraint firstItem="OpC-XT-Mee" firstAttribute="centerX" secondItem="hVx-B9-uF8" secondAttribute="centerX" id="XE0-m9-00M"/>
                             <constraint firstItem="ygg-jp-q3s" firstAttribute="centerX" secondItem="hVx-B9-uF8" secondAttribute="centerX" id="f9v-x4-wTq"/>
+                            <constraint firstItem="lv4-6V-6Zw" firstAttribute="centerY" secondItem="ZqY-Of-9MN" secondAttribute="centerY" constant="-168" id="oQ3-q7-swW"/>
+                            <constraint firstItem="lv4-6V-6Zw" firstAttribute="leading" secondItem="hVx-B9-uF8" secondAttribute="leading" constant="32" id="rEl-NE-w0l"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="N1r-aR-q3f"/>
                     <connections>
+                        <outlet property="sessionTypeLabel" destination="lv4-6V-6Zw" id="AbX-bO-NY1"/>
                         <outlet property="stopButton" destination="ygg-jp-q3s" id="80x-YN-fe1"/>
                         <outlet property="timeLabel" destination="OpC-XT-Mee" id="ZEq-iJ-rD4"/>
                     </connections>
