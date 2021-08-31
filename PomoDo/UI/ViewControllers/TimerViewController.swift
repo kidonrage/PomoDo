@@ -112,8 +112,9 @@ final class TimerViewController: UIViewController {
     private func checkRestTimer() {
         let remainingSeconds = (UserSettingsManager.shared.restSessionDuration - self.restSecondsElapsed).rounded()
         
-        let minutes = (remainingSeconds / 60).rounded(.down)
-        let seconds = remainingSeconds - minutes * 60
+        // Юзаем max чтобы не уходить в минус когда надолго сворачиваем аппку
+        let minutes = max((remainingSeconds / 60).rounded(.down), 0)
+        let seconds = max(remainingSeconds - minutes * 60, 0)
         self.timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
         
         self.progressLayer.strokeEnd = CGFloat(self.restSecondsElapsed / UserSettingsManager.shared.restSessionDuration)
@@ -143,8 +144,9 @@ final class TimerViewController: UIViewController {
     private func checkWorkTimer() {
         let remainingSeconds = (UserSettingsManager.shared.workSessionDuration - self.workSecondsElapsed).rounded()
         
-        let minutes = (remainingSeconds / 60).rounded(.down)
-        let seconds = remainingSeconds - minutes * 60
+        // Юзаем max чтобы не уходить в минус когда надолго сворачиваем аппку
+        let minutes = max((remainingSeconds / 60).rounded(.down), 0)
+        let seconds = max(remainingSeconds - minutes * 60, 0)
         self.timeLabel.text = String(format: "%02d:%02d", Int(minutes), Int(seconds))
         
         self.progressLayer.strokeEnd = CGFloat(self.workSecondsElapsed / UserSettingsManager.shared.workSessionDuration)
