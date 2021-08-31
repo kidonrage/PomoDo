@@ -20,9 +20,9 @@ final class TimerViewController: UIViewController {
     
     private var timer: Timer?
     
-    private let focusSpeeder: Double = 1.0
+    private let focusSpeeder: Double = 10.0
     
-    private let focusTimeInMinutes: Double = 25
+    private let focusTimeInMinutes: Double = 1.0
     private var focusTimeInSeconds: Double {
         return focusTimeInMinutes * 60
     }
@@ -35,7 +35,7 @@ final class TimerViewController: UIViewController {
         }
     }
     
-    private let restTimeInMinutes: Double = 5
+    private let restTimeInMinutes: Double = 0.5
     private var restTimeInSeconds: Double {
         return restTimeInMinutes * 60
     }
@@ -150,8 +150,6 @@ final class TimerViewController: UIViewController {
     private func startRestTimer() {
         restSecondsElapsed = 0
         isResting = true
-        
-        title = "\(task.title) – rest"
         
         continueRestTimer()
     }
