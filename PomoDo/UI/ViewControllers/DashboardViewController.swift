@@ -17,6 +17,8 @@ class DashboardViewController: UIViewController {
     
     private lazy var dismissKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     
+    private var isAlreadyStartedTaskSelected = false
+    private var isAlreadyRestedTaskSelected = false
     private var selectedTask: Task?
     
     private var tasks: [Task]?
@@ -31,6 +33,18 @@ class DashboardViewController: UIViewController {
         setupUI()
         
         updateTasks()
+        
+        if let alreadyStartedTask = UserSettingsManager.shared.getStartedTask() {
+            selectedTask = alreadyStartedTask
+            isAlreadyStartedTaskSelected = true
+            isAlreadyRestedTaskSelected = false
+            performSegue(withIdentifier: "toFocus", sender: self)
+        } else if let alreadyRestedTask = UserSettingsManager.shared.getRestedTask() {
+            selectedTask = alreadyRestedTask
+            isAlreadyStartedTaskSelected = false
+            isAlreadyRestedTaskSelected = true
+            performSegue(withIdentifier: "toFocus", sender: self)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +70,12 @@ class DashboardViewController: UIViewController {
                 let selectedTask = selectedTask
             else { return }
             
-            vc.task = selectedTask
+            vc.taskTitle = selectedTask.title
+            if isAlreadyStartedTaskSelected {
+                vc.workSessionStartTime = selectedTask.executionTimeStamp
+            } else if isAlreadyRestedTaskSelected {
+                vc.restSessionStartTime = selectedTask.executionTimeStamp
+            }
         }
     }
     
@@ -85,6 +104,8 @@ class DashboardViewController: UIViewController {
         
         let newTask = Task(title: newTaskTitle, executionTimeStamp: Date().timeIntervalSince1970)
         selectedTask = newTask
+        isAlreadyStartedTaskSelected = false
+        isAlreadyRestedTaskSelected = false
         
         view.endEditing(true)
         
@@ -265,6 +286,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         guard let taskViewModel = sectionsToDisplay?[indexPath.section].value[indexPath.row] else { return }
         
         selectedTask = Task(title: taskViewModel.taskTitle, executionTimeStamp: Date().timeIntervalSince1970)
+        isAlreadyStartedTaskSelected = false
         
         dismissKeyboard()
         

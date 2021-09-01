@@ -15,7 +15,9 @@ final class TimerViewController: UIViewController {
     @IBOutlet weak var sessionTypeLabel: UILabel!
     
     // MARK: - Public Properties
-    var task: Task!
+    var taskTitle: String!
+    var workSessionStartTime: TimeInterval?
+    var restSessionStartTime: TimeInterval?
     
     // MARK: - Private Properties
     private var progressLayer = CAShapeLayer()
@@ -23,11 +25,8 @@ final class TimerViewController: UIViewController {
     
     private var timer: Timer?
     
-    private var workSessionStartTime: TimeInterval?
-    private var restSessionStartTime: TimeInterval?
-    
     private var workSecondsElapsed: Double {
-        guard let workSessionStartTime = self.workSessionStartTime else { return 0 }
+        guard let workSessionStartTime = self.workSessionStartTime else { return UserSettingsManager.shared.workSessionDuration }
         return Date().timeIntervalSince1970 - workSessionStartTime
     }
     private var restSecondsElapsed: Double {
@@ -46,13 +45,17 @@ final class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = task.title
+        title = taskTitle
         
         navigationItem.setHidesBackButton(true, animated: true)
         
         setupTimerProgressBar()
         
-        startWorkTimer()
+        if restSessionStartTime != nil {
+            startRestTimer()
+        } else {
+            startWorkTimer()
+        }
     }
     
     // MARK: - IBActions
@@ -62,7 +65,7 @@ final class TimerViewController: UIViewController {
         let ac = UIAlertController(title: "Are You sure?", message: "Stopping the timer will delete your progress in this focus session", preferredStyle: .alert)
         
         ac.addAction(UIAlertAction(title: "Leave", style: .destructive, handler: { [weak self]  _ in
-            self?.navigationController?.popViewController(animated: true)
+            self?.leave()
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
             if self?.isResting ?? false {
@@ -77,10 +80,25 @@ final class TimerViewController: UIViewController {
     
     
     // MARK: - Private Methods
+    private func leave() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UserSettingsManager.shared.removeStartedTask()
+        UserSettingsManager.shared.removeRestedTask()
+        workSessionStartTime = nil
+        restSessionStartTime = nil
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func finishWorkSession() {
         self.timer?.invalidate()
         
-        TasksManager.shared.saveTask(task)
+        if let workSessionStartTime = self.workSessionStartTime {
+            let task = Task(title: taskTitle, executionTimeStamp: workSessionStartTime)
+            TasksManager.shared.saveTask(task)
+        }
+        
+        UserSettingsManager.shared.removeStartedTask()
+        workSessionStartTime = nil
         
         let ac = UIAlertController(title: "Yay! You've done it!", message: "It's time for the short rest now", preferredStyle: .alert)
         
@@ -88,7 +106,7 @@ final class TimerViewController: UIViewController {
             self?.startRestTimer()
         }))
         ac.addAction(UIAlertAction(title: "Leave", style: .cancel, handler: { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+            self?.leave()
         }))
         
         present(ac, animated: true)
@@ -97,12 +115,16 @@ final class TimerViewController: UIViewController {
     private func finishRestSession() {
         self.timer?.invalidate()
         
+        UserSettingsManager.shared.removeRestedTask()
+        restSessionStartTime = nil
+        
         let ac = UIAlertController(title: "Resting is over!", message: "It's time for the next work session", preferredStyle: .alert)
         
         ac.addAction(UIAlertAction(title: "I'm ready", style: .default, handler: { [weak self]  _ in
             self?.startWorkTimer()
         }))
         ac.addAction(UIAlertAction(title: "Leave", style: .cancel, handler: { [weak self] _ in
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             self?.navigationController?.popViewController(animated: true)
         }))
         
@@ -135,7 +157,28 @@ final class TimerViewController: UIViewController {
     }
     
     private func startRestTimer() {
-        restSessionStartTime = Date().timeIntervalSince1970
+        if  self.restSessionStartTime == nil {
+            let updatedRestSessionStartTime = Date().timeIntervalSince1970
+            restSessionStartTime = updatedRestSessionStartTime
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Rest session is finished!"
+            content.body = "It's time for the work now. Open an app to start work session"
+            content.sound = UNNotificationSound.default
+            content.userInfo = ["task": taskTitle]
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: UserSettingsManager.shared.restSessionDuration, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "restFinished", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                print(error?.localizedDescription)
+            }
+            
+            let task = Task(title: taskTitle, executionTimeStamp: updatedRestSessionStartTime)
+            UserSettingsManager.shared.saveRestedTask(task: task)
+        }
+        
         isResting = true
         
         continueRestTimer()
@@ -167,7 +210,28 @@ final class TimerViewController: UIViewController {
     }
     
     private func startWorkTimer() {
-        workSessionStartTime = Date().timeIntervalSince1970
+        if  self.workSessionStartTime == nil {
+            let updatedWorkSessionStartTime = Date().timeIntervalSince1970
+            workSessionStartTime = updatedWorkSessionStartTime
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Work session is finished!"
+            content.body = "It's time for the short rest now. Open an app to start rest session"
+            content.sound = UNNotificationSound.default
+            content.userInfo = ["task": taskTitle]
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: UserSettingsManager.shared.workSessionDuration, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "workFinished", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                print(error?.localizedDescription)
+            }
+            
+            let task = Task(title: taskTitle, executionTimeStamp: updatedWorkSessionStartTime)
+            UserSettingsManager.shared.saveStartedTask(task: task)
+        }
+        
         isResting = false
         
         continueWorkTimer()
