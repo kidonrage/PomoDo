@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsx-Y0-ghU">
-                                <rect key="frame" x="0.0" y="778" width="414" height="84"/>
+                                <rect key="frame" x="0.0" y="778" width="414" height="118"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yo-vb-CKZ">
                                         <rect key="frame" x="20" y="20" width="378" height="44"/>
@@ -69,13 +69,12 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="6Yo-vb-CKZ" secondAttribute="bottom" constant="20" symbolic="YES" id="2KB-Kl-FSS"/>
                                     <constraint firstAttribute="trailing" secondItem="6Yo-vb-CKZ" secondAttribute="trailing" constant="16" id="2gg-Y0-TIg"/>
                                     <constraint firstItem="6Yo-vb-CKZ" firstAttribute="leading" secondItem="nsx-Y0-ghU" secondAttribute="leading" constant="20" symbolic="YES" id="8gg-Lk-SQJ"/>
                                     <constraint firstItem="6Yo-vb-CKZ" firstAttribute="top" secondItem="nsx-Y0-ghU" secondAttribute="top" constant="20" symbolic="YES" id="bhb-we-oAz"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZ3-9f-RnV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZ3-9f-RnV">
                                 <rect key="frame" x="0.0" y="88" width="414" height="690"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <gestureRecognizers/>
@@ -123,9 +122,10 @@
                             <constraint firstItem="AZ3-9f-RnV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2Hh-kx-4Jn"/>
                             <constraint firstItem="AZ3-9f-RnV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AiN-lJ-9B6"/>
                             <constraint firstItem="AZ3-9f-RnV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KAV-7I-tbB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nsx-Y0-ghU" secondAttribute="bottom" id="MKs-qo-Ncm"/>
                             <constraint firstItem="nsx-Y0-ghU" firstAttribute="top" secondItem="AZ3-9f-RnV" secondAttribute="bottom" id="QP5-G3-PiL"/>
                             <constraint firstAttribute="trailing" secondItem="nsx-Y0-ghU" secondAttribute="trailing" id="aYs-Vc-Orb"/>
+                            <constraint firstAttribute="bottom" secondItem="nsx-Y0-ghU" secondAttribute="bottom" id="amy-Lp-vPF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6Yo-vb-CKZ" secondAttribute="bottom" constant="20" id="ltA-IZ-taA"/>
                             <constraint firstItem="nsx-Y0-ghU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uAX-JL-wiI"/>
                         </constraints>
                     </view>
