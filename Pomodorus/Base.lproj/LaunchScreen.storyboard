@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="qJG-TP-gcF">
+                                <rect key="frame" x="107" y="181" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="7kZ-JC-8uC"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="eiI-6k-bQa"/>
+                                    <constraint firstAttribute="width" constant="200" id="isL-dj-p0v"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DeLab" translatesAutoresizingMaskIntoConstraints="NO" id="Gcz-3X-YxH">
+                                <rect key="frame" x="168" y="823" width="78" height="23"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Track your time with Pomodorus" translatesAutoresizingMaskIntoConstraints="NO" id="4mh-61-xK7">
+                                <rect key="frame" x="87" y="421" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="FbG-kH-sR2"/>
+                                    <constraint firstAttribute="width" constant="240" id="MBY-MC-72L"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qJG-TP-gcF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="BKc-C3-6eo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gcz-3X-YxH" secondAttribute="bottom" constant="16" id="GL0-iB-CXU"/>
+                            <constraint firstItem="4mh-61-xK7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Gl4-QD-2uA"/>
+                            <constraint firstItem="4mh-61-xK7" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="32" id="PTa-eQ-mHL"/>
+                            <constraint firstItem="Gcz-3X-YxH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="olW-pB-hSa"/>
+                            <constraint firstItem="4mh-61-xK7" firstAttribute="top" secondItem="qJG-TP-gcF" secondAttribute="bottom" constant="40" id="wJE-kX-yjJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="DeLab" width="78" height="23"/>
+        <image name="Logo" width="212" height="212"/>
+        <image name="Track your time with Pomodorus" width="225.5" height="59.5"/>
+    </resources>
+</document>
